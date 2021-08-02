@@ -1,0 +1,532 @@
+/* GENERAL STYLES */
+body {
+  background: #ccc;
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 100vh;
+  font-family: "Nexa", "Questrial", "Raleway", "ITC Avant Garde Gothic", "TeX Gyre Adventor", "Century Gothic", "Futura", "Helvetica Neue", "Helvetica", sans-serif;
+  /* font-size: 16pt; */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+main {
+  margin: 0 auto;
+  max-width: 915px;
+  padding: 0px 10px;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 75px;
+  background: black;
+  color: white;
+  text-align: center;
+  padding: 0rem 1rem;
+}
+
+label {
+  vertical-align: text-bottom;
+  margin-bottom: 0px;
+}
+
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+}
+
+h3 {
+  margin: 0.5rem 0rem !important;
+}
+
+p {
+  margin-bottom: 0rem;
+}
+
+td {
+  font-weight: 300;
+}
+
+.ulBefore>p {
+  margin-bottom: 0rem;
+}
+
+.ulBefore>p:before {
+  content: "\A";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--dark);
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.hidden {
+  display: none;
+}
+
+.strike-through {
+  text-decoration: line-through;
+  color: #6C757D !important;
+}
+
+.text-purple {
+  color: var(--purple);
+}
+
+.legend {
+  border: 1px solid black;
+}
+
+/* NAVBAR */
+div#navbar {
+  z-index: 3;
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+}
+
+#navbar button {
+  background-color: rgb(110, 110, 110) !important;
+  border-radius: 50%;
+  -webkit-transform: scale(1.2);
+  transform: scale(1.2);
+  float: right;
+  z-index: 0;
+}
+
+div.nav-content {
+  background-color: rgb(110, 110, 110) !important;
+  text-align: right;
+  z-index: 1;
+  position: relative;
+  top: -1rem;
+  left: 1rem;
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
+
+div.nav-content a {
+  display: block;
+  color: white !important;
+  /* padding: 5px; */
+  border: 0.5px solid black;
+  padding: 10px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+div.nav-content a:hover {
+  background: var(--gray-dark);
+  text-decoration: none;
+  -webkit-box-shadow: inset 0 1px 6px darkred;
+  box-shadow: inset 0 1px 6px darkred;
+}
+
+div.nav-content div {
+  color: white;
+  text-align: right;
+  position: relative;
+  left: 2rem;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+div.nav-content a:last-child {
+  padding-bottom: 0.75rem;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
+
+#nav-bbm {
+  cursor: pointer;
+}
+
+/* SPLASH */
+.pi-10 {
+  padding: 10rem !important;
+  padding-bottom: 1rem !important;
+}
+
+#splash {
+  background-color: #fce055;
+  background-image: linear-gradient(319deg, #fce055 0%, #256eff 37%, #46237a 100%);
+  color: white;
+}
+
+.buttons {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.buttons>a {
+  text-decoration: none;
+  color: white;
+  width: 200px;
+  height: 100px;
+  background: #F2385A;
+  position: relative;
+  margin: 30px;
+  top: 30px;
+  padding: 14px;
+  font-size: 50px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 15px 0px 0px #f02046;
+  box-shadow: 0px 15px 0px 0px #f02046;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.buttons>a:active {
+  top: 38px;
+  -webkit-box-shadow: 0px 7px 0px 0px #f02046;
+  box-shadow: 0px 7px 0px 0px #f02046;
+}
+
+.buttons>a.button1 {
+  background-color: #F2385A;
+}
+
+/* SIMPLE WIRES */
+.wire-header {
+  background-color: #ed3952;
+  font-weight: 700 !important;
+}
+
+.wire-header>h3 {
+  font-weight: 700 !important;
+}
+
+.strike-through span {
+  color: #6C757D !important;
+}
+
+/* BUTTON */
+.button-header {
+  background-color: #fd9131;
+  font-weight: 700 !important;
+}
+
+.button-header>h3 {
+  font-weight: 700 !important;
+}
+
+.buttonCheck {
+  background-color: var(--warning);
+}
+
+.buttonHold {
+  background-color: var(--success);
+}
+
+.buttonPress {
+  background-color: var(--danger);
+}
+
+.disabledBat {
+  background-color: #6C757D !important;
+}
+
+.disabledCar {
+  background-color: #6C757D !important;
+}
+
+.disabledC {
+  background-color: #6C757D !important;
+}
+
+.tablebuttons {
+  border-style: hidden;
+  border-right-style: solid;
+}
+
+.alternateC {
+  background-color: var(--purple) !important;
+}
+
+.blueStrip {
+  display: inline-block;
+  background: var(--primary);
+  height: 75px;
+  width: 25px;
+  text-align: center;
+  vertical-align: middle;
+  color: white;
+  -webkit-writing-mode: vertical-lr;
+  -ms-writing-mode: tb-lr;
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
+  -webkit-transform: rotate(-180deg);
+  transform: rotate(-180deg);
+}
+
+.yellowStrip {
+  display: inline-block;
+  background: var(--warning);
+  height: 75px;
+  width: 25px;
+  text-align: center;
+  vertical-align: middle;
+  color: black;
+  -webkit-writing-mode: vertical-lr;
+  -ms-writing-mode: tb-lr;
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
+  -webkit-transform: rotate(-180deg);
+  transform: rotate(-180deg);
+}
+
+.elseStrip {
+  display: inline-block;
+  background: var(--dark);
+  height: 75px;
+  width: 25px;
+  text-align: center;
+  vertical-align: middle;
+  color: white;
+  -webkit-writing-mode: vertical-lr;
+  -ms-writing-mode: tb-lr;
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
+  -webkit-transform: rotate(-180deg);
+  transform: rotate(-180deg);
+}
+
+.stripDiv {
+  text-align: center;
+}
+
+.stripNumbers {
+  font-size: 1.5rem;
+  padding: 0.12rem;
+}
+
+.text-left {
+  padding-left: 4px;
+}
+
+/* SYMBOLS/KEYPAD */
+.symbols-header {
+  background-color: #f8eb3b;
+  font-weight: 700 !important;
+}
+
+.symbols-header>h3 {
+  font-weight: 700 !important;
+}
+
+/* SIMON SAYS */
+.simon-header {
+  background: #acef2f;
+  font-weight: 700 !important;
+}
+
+.simon-header>h3 {
+  font-weight: 700 !important;
+}
+
+.imgDisabled {
+  -webkit-filter: brightness(0.35);
+  filter: brightness(0.35);
+}
+
+/* WOF1 & WOF2 */
+.wof1-header {
+  background-color: #3fcb30;
+}
+
+.wof2-header {
+  background-color: #22aaaa;
+}
+
+/* MEMORY */
+.memory-header {
+  background-color: #423cac;
+  font-weight: 700 !important;
+}
+
+.memory-header>h3 {
+  font-weight: 700 !important;
+}
+
+p.before1:before {
+  content: "1";
+}
+
+p.before2:before {
+  content: "2";
+}
+
+p.before3:before {
+  content: "3";
+}
+
+p.before4:before {
+  content: "4";
+}
+
+.memoryInput::-webkit-inner-spin-button,
+.memoryInput::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* MORSE */
+.morse-header {
+  background-color: #ba25ad;
+  font-weight: 700 !important;
+}
+
+.morse-header>h3 {
+  font-weight: 700 !important;
+}
+
+.morseBold {
+  font-size: xx-large;
+}
+
+.morseTable>tbody>tr>td {
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+/* COMPLEX WIRES */
+.compwires-header {
+  background-color: #ed3952;
+  font-weight: 700 !important;
+}
+
+.compwires-header>h3 {
+  font-weight: 700 !important;
+}
+
+.wireCut {
+  background: var(--success) !important;
+  color: white;
+  padding: 0.5rem;
+}
+
+.wireDontCut {
+  background: var(--danger) !important;
+  color: white;
+  padding: 0.5rem;
+}
+
+.wireBattery {
+  background: var(--warning);
+  color: white;
+  padding: 0.5rem;
+}
+
+.wireParallel {
+  background: var(--info);
+  color: white;
+  padding: 0.5rem;
+}
+
+.wireSerial {
+  background: var(--indigo);
+  color: white;
+  padding: 0.5rem;
+}
+
+.wireCut>svg,
+.wireDontCut>svg,
+.wireSerial>svg,
+.wireParallel>svg,
+.wireBattery>svg {
+  vertical-align: middle;
+}
+
+.wireCut,
+.wireDontCut,
+.wireSerial,
+.wireParallel,
+.wireBattery {
+  line-height: 66px;
+}
+
+.compWireImg {
+  max-height: 60%;
+}
+
+#compLegend>tbody>tr>td.text-left {
+  padding-left: 0.5rem !important;
+}
+
+#compLegend>tbody>tr>td.text-right {
+  padding-right: 0.5rem !important;
+}
+
+/* WIRE SEQUENCES */
+.wireSeq-header {
+  background-color: #fd9131;
+  font-weight: 700 !important;
+}
+
+.wireSeq-header>h3 {
+  font-weight: 700 !important;
+}
+
+.wireSeqStrike {
+  cursor: pointer !important;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently supported by Chrome and Opera */
+}
+
+/* MAZE */
+.maze-header {
+  background-color: #f8eb3b;
+  font-weight: 700 !important;
+}
+
+.maze-header>h3 {
+  font-weight: 700 !important;
+}
+
+.mazeImage {
+  width: 100%;
+  cursor: pointer !important;
+}
+
+/* PASSWORDS */
+
+.passwords-header {
+  background-color: #acef2f;
+  font-weight: 700 !important;
+}
+
+.passwords-header>h3 {
+  font-weight: 700 !important;
+}
+
+/* KNOBS */
+
+.knob-header {
+  background-color: #3fcb30;
+  font-weight: 700 !important;
+}
+
+.knob-header>h3 {
+  font-weight: 700 !important;
+}
