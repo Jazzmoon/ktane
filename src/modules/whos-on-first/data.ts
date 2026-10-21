@@ -1,0 +1,82 @@
+export const POSITIONS = ['TL', 'TR', 'ML', 'MR', 'BL', 'BR'] as const
+export type Position = (typeof POSITIONS)[number]
+
+export const POSITION_NAMES: Record<Position, string> = {
+  TL: 'Top left',
+  TR: 'Top right',
+  ML: 'Middle left',
+  MR: 'Middle right',
+  BL: 'Bottom left',
+  BR: 'Bottom right',
+}
+
+/** Step 1: display word → which button's label to read. '' is an empty display. */
+export const STEP1: Readonly<Record<string, Position>> = {
+  '': 'BL',
+  BLANK: 'MR',
+  C: 'TR',
+  CEE: 'BR',
+  DISPLAY: 'BR',
+  FIRST: 'TR',
+  'HOLD ON': 'BR',
+  LEAD: 'BR',
+  LED: 'ML',
+  LEED: 'BL',
+  NO: 'BR',
+  NOTHING: 'ML',
+  OKAY: 'TR',
+  READ: 'MR',
+  RED: 'MR',
+  REED: 'BL',
+  SAYS: 'BR',
+  SEE: 'BR',
+  THEIR: 'MR',
+  THERE: 'BR',
+  'THEY ARE': 'ML',
+  "THEY'RE": 'BL',
+  UR: 'TL',
+  YES: 'ML',
+  YOU: 'MR',
+  'YOU ARE': 'BR',
+  YOUR: 'MR',
+  "YOU'RE": 'MR',
+}
+
+/**
+ * Step 2: label → press the first word in this list that appears on the
+ * module. Lists stop at the label itself: it is always on the module, so words
+ * after it can never be reached.
+ */
+export const STEP2: Readonly<Record<string, readonly string[]>> = {
+  READY: ['YES', 'OKAY', 'WHAT', 'MIDDLE', 'LEFT', 'PRESS', 'RIGHT', 'BLANK', 'READY'],
+  FIRST: ['LEFT', 'OKAY', 'YES', 'MIDDLE', 'NO', 'RIGHT', 'NOTHING', 'UHHH', 'WAIT', 'READY', 'BLANK', 'WHAT', 'PRESS', 'FIRST'],
+  NO: ['BLANK', 'UHHH', 'WAIT', 'FIRST', 'WHAT', 'READY', 'RIGHT', 'YES', 'NOTHING', 'LEFT', 'PRESS', 'OKAY', 'NO'],
+  BLANK: ['WAIT', 'RIGHT', 'OKAY', 'MIDDLE', 'BLANK'],
+  NOTHING: ['UHHH', 'RIGHT', 'OKAY', 'MIDDLE', 'YES', 'BLANK', 'NO', 'PRESS', 'LEFT', 'WHAT', 'WAIT', 'FIRST', 'NOTHING'],
+  YES: ['OKAY', 'RIGHT', 'UHHH', 'MIDDLE', 'FIRST', 'WHAT', 'PRESS', 'READY', 'NOTHING', 'YES'],
+  WHAT: ['UHHH', 'WHAT'],
+  UHHH: ['READY', 'NOTHING', 'LEFT', 'WHAT', 'OKAY', 'YES', 'RIGHT', 'NO', 'PRESS', 'BLANK', 'UHHH'],
+  LEFT: ['RIGHT', 'LEFT'],
+  RIGHT: ['YES', 'NOTHING', 'READY', 'PRESS', 'NO', 'WAIT', 'WHAT', 'RIGHT'],
+  MIDDLE: ['BLANK', 'READY', 'OKAY', 'WHAT', 'NOTHING', 'PRESS', 'NO', 'WAIT', 'LEFT', 'MIDDLE'],
+  OKAY: ['MIDDLE', 'NO', 'FIRST', 'YES', 'UHHH', 'NOTHING', 'WAIT', 'OKAY'],
+  WAIT: ['UHHH', 'NO', 'BLANK', 'OKAY', 'YES', 'LEFT', 'FIRST', 'PRESS', 'WHAT', 'WAIT'],
+  PRESS: ['RIGHT', 'MIDDLE', 'YES', 'READY', 'PRESS'],
+  YOU: ['SURE', 'YOU ARE', 'YOUR', "YOU'RE", 'NEXT', 'UH HUH', 'UR', 'HOLD', 'WHAT?', 'YOU'],
+  'YOU ARE': ['YOUR', 'NEXT', 'LIKE', 'UH HUH', 'WHAT?', 'DONE', 'UH UH', 'HOLD', 'YOU', 'U', "YOU'RE", 'SURE', 'UR', 'YOU ARE'],
+  YOUR: ['UH UH', 'YOU ARE', 'UH HUH', 'YOUR'],
+  "YOU'RE": ['YOU', "YOU'RE"],
+  UR: ['DONE', 'U', 'UR'],
+  U: ['UH HUH', 'SURE', 'NEXT', 'WHAT?', "YOU'RE", 'UR', 'UH UH', 'DONE', 'U'],
+  'UH HUH': ['UH HUH'],
+  'UH UH': ['UR', 'U', 'YOU ARE', "YOU'RE", 'NEXT', 'UH UH'],
+  'WHAT?': ['YOU', 'HOLD', "YOU'RE", 'YOUR', 'U', 'DONE', 'UH UH', 'LIKE', 'YOU ARE', 'UH HUH', 'UR', 'NEXT', 'WHAT?'],
+  DONE: ['SURE', 'UH HUH', 'NEXT', 'WHAT?', 'YOUR', 'UR', "YOU'RE", 'HOLD', 'LIKE', 'YOU', 'U', 'YOU ARE', 'UH UH', 'DONE'],
+  NEXT: ['WHAT?', 'UH HUH', 'UH UH', 'YOUR', 'HOLD', 'SURE', 'NEXT'],
+  HOLD: ['YOU ARE', 'U', 'DONE', 'UH UH', 'YOU', 'UR', 'SURE', 'WHAT?', "YOU'RE", 'NEXT', 'HOLD'],
+  SURE: ['YOU ARE', 'DONE', 'LIKE', "YOU'RE", 'YOU', 'HOLD', 'UH HUH', 'UR', 'SURE'],
+  LIKE: ["YOU'RE", 'NEXT', 'U', 'UR', 'HOLD', 'DONE', 'UH UH', 'WHAT?', 'UH HUH', 'YOU', 'LIKE'],
+}
+
+export const DISPLAY_WORDS = Object.keys(STEP1).sort()
+export const LABEL_WORDS = Object.keys(STEP2).sort()
