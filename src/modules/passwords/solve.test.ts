@@ -15,10 +15,29 @@ describe('passwords', () => {
 
   it('filters by the letters available in each column', () => {
     expect(filterPasswords(['tw'])).toEqual([
-      'their', 'there', 'these', 'thing', 'think', 'three', 'water', 'where', 'which', 'world', 'would', 'write',
+      'their',
+      'there',
+      'these',
+      'thing',
+      'think',
+      'three',
+      'water',
+      'where',
+      'which',
+      'world',
+      'would',
+      'write',
     ])
     expect(filterPasswords(['tw', 'ha'])).toEqual([
-      'their', 'there', 'these', 'thing', 'think', 'three', 'water', 'where', 'which',
+      'their',
+      'there',
+      'these',
+      'thing',
+      'think',
+      'three',
+      'water',
+      'where',
+      'which',
     ])
     expect(filterPasswords(['tw', 'ha', 'ie', 'ns'])).toEqual(['these', 'thing', 'think'])
     expect(filterPasswords(['tw', 'ha', 'ie', 'ns', 'k'])).toEqual(['think'])

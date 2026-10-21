@@ -15,11 +15,9 @@ export interface ButtonAction {
 /** The Button, manual section "On the Subject of The Button". Rules apply in order. */
 export function solveButton(color: ButtonColor, label: ButtonLabel, f: Facts): ButtonAction {
   if (color === 'blue' && label === 'abort') return { action: 'hold', rule: 'Blue + "Abort"' }
-  if (label === 'detonate' && f.batteries() > 1)
-    return { action: 'tap', rule: 'More than 1 battery + "Detonate"' }
+  if (label === 'detonate' && f.batteries() > 1) return { action: 'tap', rule: 'More than 1 battery + "Detonate"' }
   if (color === 'white' && f.litCAR()) return { action: 'hold', rule: 'White + lit CAR' }
-  if (f.batteries() > 2 && f.litFRK())
-    return { action: 'tap', rule: 'More than 2 batteries + lit FRK' }
+  if (f.batteries() > 2 && f.litFRK()) return { action: 'tap', rule: 'More than 2 batteries + lit FRK' }
   if (color === 'yellow') return { action: 'hold', rule: 'Yellow' }
   if (color === 'red' && label === 'hold') return { action: 'tap', rule: 'Red + "Hold"' }
   return { action: 'hold', rule: 'Otherwise' }

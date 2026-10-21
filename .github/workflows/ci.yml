@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test
+
+      # Primary target: Nitro node server (.output/), started with `npm start`.
+      - run: npm run build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: server
+          path: .output
+          include-hidden-files: true
+
+      # Emergency target: fully static site (dist/), host on any file server.
+      - run: npm run build:static
+      - uses: actions/upload-artifact@v4
+        with:
+          name: static
+          path: dist

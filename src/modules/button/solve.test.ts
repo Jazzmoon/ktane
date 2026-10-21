@@ -31,9 +31,10 @@ describe('the button', () => {
     expect(act('white', 'press')).toEqual({ kind: 'need', fact: 'litCAR' })
   })
   it('more than two batteries + lit FRK → tap', () => {
-    expect(
-      act('white', 'press', { ...emptyBomb, litCAR: false, batteries: 3, litFRK: true }),
-    ).toEqual({ kind: 'answer', value: 'tap' })
+    expect(act('white', 'press', { ...emptyBomb, litCAR: false, batteries: 3, litFRK: true })).toEqual({
+      kind: 'answer',
+      value: 'tap',
+    })
   })
   it('does not ask about FRK with two or fewer batteries', () => {
     expect(act('red', 'press', { ...emptyBomb, batteries: 2 })).toEqual({

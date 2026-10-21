@@ -4,15 +4,16 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev",
-    "build": "vite build",
-    "build:static": "BUILD_TARGET=static vite build && node scripts/finalize-static.mjs",
+    "build": "vite build && node scripts/check-prerender.mjs .output/public/index.html",
+    "build:static": "BUILD_TARGET=static vite build && node scripts/finalize-static.mjs && node scripts/check-prerender.mjs dist/index.html",
     "start": "node .output/server/index.mjs",
-    "preview:static": "vite preview --outDir dist",
+    "serve:static": "node scripts/serve-static.mjs dist",
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "check": "npm run lint && npm run typecheck && npm test"
   },
   "dependencies": {
     "@tanstack/react-router": "1.170.44",

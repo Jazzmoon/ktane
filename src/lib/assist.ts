@@ -19,11 +19,7 @@ const rank = (level: Level) => LEVELS.indexOf(level)
  * The level a module actually renders at: the highest level it supports that
  * is no higher than both its own setting and the global ceiling.
  */
-export function effectiveLevel(
-  setting: Level,
-  ceiling: Level,
-  supported: readonly Level[],
-): Level {
+export function effectiveLevel(setting: Level, ceiling: Level, supported: readonly Level[]): Level {
   const cap = Math.min(rank(setting), rank(ceiling))
   for (let i = cap; i >= 0; i--) {
     const level = LEVELS[i]!

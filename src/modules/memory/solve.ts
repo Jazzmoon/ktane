@@ -6,12 +6,7 @@ export interface Press {
   label: Digit
 }
 
-export function solveMemoryStage(
-  stage: Stage,
-  display: Digit,
-  labels: Labels,
-  history: readonly Press[],
-): Press {
+export function solveMemoryStage(stage: Stage, display: Digit, labels: Labels, history: readonly Press[]): Press {
   const rule = MEMORY_RULES[stage - 1]![display - 1]!
   const atPosition = (position: Digit): Press => ({ position, label: labels[position - 1]! })
   const withLabel = (label: Digit): Press => {

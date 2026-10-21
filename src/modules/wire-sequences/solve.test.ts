@@ -16,7 +16,11 @@ describe('wire sequences', () => {
       { color: 'black', letter: 'B' }, // black #1 → ABC: cut
     ])
     expect(r.map((x) => [x.occurrence, x.cut])).toEqual([
-      [1, true], [1, false], [2, false], [3, true], [1, true],
+      [1, true],
+      [1, false],
+      [2, false],
+      [3, true],
+      [1, true],
     ])
   })
 

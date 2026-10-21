@@ -16,7 +16,13 @@ describe('morse', () => {
   it('narrows candidates from letters seen so far', () => {
     expect(candidates('').map((w) => w.word)).toHaveLength(16)
     expect(candidates('B').map((w) => w.word)).toEqual([
-      'boxes', 'strobe', 'bistro', 'bombs', 'break', 'brick', 'beats',
+      'boxes',
+      'strobe',
+      'bistro',
+      'bombs',
+      'break',
+      'brick',
+      'beats',
     ])
     expect(candidates('she').map((w) => w.word)).toEqual(['shell'])
     // "…S" then "H…" can be the end of HALLS looping into its start

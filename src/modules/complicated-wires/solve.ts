@@ -19,10 +19,22 @@ export const LETTER_MEANING: Record<CompLetter, string> = {
 
 /** Venn diagram regions, indexed by bitmask red|blue<<1|star<<2|led<<3. */
 const VENN: readonly CompLetter[] = [
-  'C', 'S', 'S', 'S', //       -, r, b, rb
-  'C', 'C', 'D', 'P', // s:    -, r, b, rb
-  'D', 'B', 'P', 'S', // l:    -, r, b, rb
-  'B', 'B', 'P', 'D', // s+l:  -, r, b, rb
+  'C',
+  'S',
+  'S',
+  'S', //       -, r, b, rb
+  'C',
+  'C',
+  'D',
+  'P', // s:    -, r, b, rb
+  'D',
+  'B',
+  'P',
+  'S', // l:    -, r, b, rb
+  'B',
+  'B',
+  'P',
+  'D', // s+l:  -, r, b, rb
 ]
 
 export function letterFor(w: CompWire): CompLetter {

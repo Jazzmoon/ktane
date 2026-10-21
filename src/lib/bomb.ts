@@ -24,14 +24,7 @@ export const emptyBomb: BombInfo = {
   strikes: null,
 }
 
-export type FactName =
-  | 'serialOdd'
-  | 'serialVowel'
-  | 'batteries'
-  | 'litCAR'
-  | 'litFRK'
-  | 'parallelPort'
-  | 'strikes'
+export type FactName = 'serialOdd' | 'serialVowel' | 'batteries' | 'litCAR' | 'litFRK' | 'parallelPort' | 'strikes'
 
 export const FACT_LABELS: Record<FactName, string> = {
   serialOdd: 'serial number (last digit)',

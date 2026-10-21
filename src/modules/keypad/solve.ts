@@ -6,9 +6,7 @@ export function candidateColumns(picked: readonly Glyph[]): number[] {
 }
 
 /** Keypad: press the four symbols in the order they appear in the matching column. */
-export function solveKeypad(
-  picked: readonly Glyph[],
-): { column: number; order: Glyph[] } | null {
+export function solveKeypad(picked: readonly Glyph[]): { column: number; order: Glyph[] } | null {
   if (picked.length !== 4) return null
   const [column] = candidateColumns(picked)
   if (column === undefined) return null

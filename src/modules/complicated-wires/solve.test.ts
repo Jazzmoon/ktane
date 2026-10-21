@@ -11,18 +11,29 @@ const w = (s: string): CompWire => ({
 
 describe('complicated wires venn diagram', () => {
   it.each([
-    ['', 'C'], ['r', 'S'], ['b', 'S'], ['rb', 'S'],
-    ['s', 'C'], ['l', 'D'], ['rs', 'C'], ['bs', 'D'],
-    ['rl', 'B'], ['bl', 'P'], ['rbs', 'P'], ['rbl', 'S'],
-    ['rsl', 'B'], ['bsl', 'P'], ['rbsl', 'D'], ['sl', 'B'],
+    ['', 'C'],
+    ['r', 'S'],
+    ['b', 'S'],
+    ['rb', 'S'],
+    ['s', 'C'],
+    ['l', 'D'],
+    ['rs', 'C'],
+    ['bs', 'D'],
+    ['rl', 'B'],
+    ['bl', 'P'],
+    ['rbs', 'P'],
+    ['rbl', 'S'],
+    ['rsl', 'B'],
+    ['bsl', 'P'],
+    ['rbsl', 'D'],
+    ['sl', 'B'],
   ])('wire "%s" → %s', (props, letter) => {
     expect(letterFor(w(props))).toBe(letter)
   })
 })
 
 describe('solveComplicated', () => {
-  const cut = (props: string, bomb: BombInfo = emptyBomb) =>
-    solveWith(bomb, (f) => solveComplicated(w(props), f).cut)
+  const cut = (props: string, bomb: BombInfo = emptyBomb) => solveWith(bomb, (f) => solveComplicated(w(props), f).cut)
 
   it('C/D need nothing', () => {
     expect(cut('')).toEqual({ kind: 'answer', value: true })

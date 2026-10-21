@@ -1,0 +1,6 @@
+www
+dist
+.output
+src/routeTree.gen.ts
+src/modules/keypad/glyph-paths.ts
+package-lock.json
