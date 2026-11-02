@@ -5,3 +5,5 @@ dist
 .nitro
 *.log
 .DS_Store
+
+.superpowers/

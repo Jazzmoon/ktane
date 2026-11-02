@@ -38,7 +38,7 @@ export function Sidebar({ onNavigate, onSearch }: { onNavigate?: () => void; onS
     <nav aria-label="Modules" className="flex h-full flex-col gap-4 p-4">
       <div className="flex items-center gap-2">
         <Bomb className="size-5" />
-        <span className="font-semibold tracking-tight">Better Bomb Manual</span>
+        <span className="font-type font-bold uppercase tracking-wider">Better Bomb Manual</span>
         <span className="ml-auto">
           <ThemeButton />
         </span>
@@ -50,7 +50,7 @@ export function Sidebar({ onNavigate, onSearch }: { onNavigate?: () => void; onS
       </Button>
 
       <div className="space-y-1.5">
-        <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+        <span className="font-type text-[11px] font-bold uppercase tracking-[0.15em] text-muted-foreground">
           Max assistance (all modules)
         </span>
         <GlobalLevelPicker value={assist.ceiling} onChange={setCeiling} />

@@ -4,7 +4,7 @@ import { useSelector } from '@tanstack/react-store'
 import { SERIAL_LENGTH, serialFacts, type BombInfo, type FactName } from '@/lib/bomb'
 import { cn } from '@/lib/utils'
 import { bombStore, factFocusStore, updateBomb } from '@/state/bomb'
-import { Segmented } from './kit'
+import { StrikeControl, ToggleSwitch } from './kit'
 import { Button } from './ui/button'
 import { Input } from './ui/input'
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from './ui/sheet'
@@ -19,13 +19,6 @@ const FIELD_FOR: Record<FactName, string> = {
   strikes: 'strikes',
 }
 
-const YES_NO = [
-  { value: 'yes', label: 'Yes' },
-  { value: 'no', label: 'No' },
-] as const
-const toYN = (v: boolean | null) => (v === null ? null : v ? 'yes' : 'no')
-const fromYN = (v: 'yes' | 'no' | null) => (v === null ? null : v === 'yes')
-
 function Field({
   id,
   label,
@@ -39,7 +32,7 @@ function Field({
 }) {
   return (
     <div data-field={id} className={cn('flex flex-col gap-1 rounded-md', className)}>
-      <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">{label}</span>
+      <span className="font-type text-[11px] font-bold uppercase tracking-[0.15em] text-muted-foreground">{label}</span>
       {children}
     </div>
   )
@@ -82,11 +75,11 @@ export function BombFields({ focus, className }: { focus?: FactName | null; clas
         </span>
       </Field>
       <Field id="batteries" label="Batteries">
-        <div className="flex items-center rounded-lg border bg-muted/50 p-0.5">
+        <div className="flex h-16 items-center rounded-md border-2 border-foreground/70 bg-muted/50 p-0.5">
           <Button
             variant="ghost"
             size="icon-sm"
-            className="size-10 sm:size-8"
+            className="size-10 rounded-sm sm:size-8"
             aria-label="Fewer batteries"
             onClick={() => updateBomb({ batteries: Math.max(0, (bomb.batteries ?? 1) - 1) })}
           >
@@ -112,44 +105,31 @@ export function BombFields({ focus, className }: { focus?: FactName | null; clas
         </div>
       </Field>
       <Field id="car" label="Lit CAR">
-        <Segmented
+        <ToggleSwitch
           label="Lit CAR indicator"
-          size="sm"
-          allowDeselect
-          value={toYN(bomb.litCAR)}
-          onChange={(v) => updateBomb({ litCAR: fromYN(v) })}
-          options={YES_NO}
+          caption="CAR"
+          value={bomb.litCAR}
+          onChange={(v) => updateBomb({ litCAR: v })}
         />
       </Field>
       <Field id="frk" label="Lit FRK">
-        <Segmented
+        <ToggleSwitch
           label="Lit FRK indicator"
-          size="sm"
-          allowDeselect
-          value={toYN(bomb.litFRK)}
-          onChange={(v) => updateBomb({ litFRK: fromYN(v) })}
-          options={YES_NO}
+          caption="FRK"
+          value={bomb.litFRK}
+          onChange={(v) => updateBomb({ litFRK: v })}
         />
       </Field>
       <Field id="parallel" label="Parallel port">
-        <Segmented
+        <ToggleSwitch
           label="Parallel port"
-          size="sm"
-          allowDeselect
-          value={toYN(bomb.parallelPort)}
-          onChange={(v) => updateBomb({ parallelPort: fromYN(v) })}
-          options={YES_NO}
+          caption="Port"
+          value={bomb.parallelPort}
+          onChange={(v) => updateBomb({ parallelPort: v })}
         />
       </Field>
       <Field id="strikes" label="Strikes">
-        <Segmented
-          label="Strikes"
-          size="sm"
-          allowDeselect
-          value={bomb.strikes}
-          onChange={(v) => updateBomb({ strikes: v })}
-          options={[0, 1, 2].map((n) => ({ value: n as 0 | 1 | 2, label: n }))}
-        />
+        <StrikeControl strikes={bomb.strikes} className="h-16 items-center" />
       </Field>
     </div>
   )
@@ -211,7 +191,7 @@ export function BombBarMobile() {
           className="max-h-[85dvh] overflow-y-auto pb-[max(1rem,env(safe-area-inset-bottom))]"
         >
           <SheetHeader className="pb-0">
-            <SheetTitle>Bomb info</SheetTitle>
+            <SheetTitle className="font-type uppercase tracking-widest">Bomb info</SheetTitle>
             <SheetDescription>Leave anything you don't know yet blank. Nothing is assumed.</SheetDescription>
           </SheetHeader>
           <BombFields focus={request.fact} key={request.n} className="px-4" />

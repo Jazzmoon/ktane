@@ -89,3 +89,33 @@ describe('module reset', () => {
     expect(sessionStore.state.simon).toBeUndefined()
   })
 })
+
+describe('toggle switches and strikes', () => {
+  it('a bomb-info toggle cycles unknown → yes → no → unknown', async () => {
+    const { BombFields } = await import('@/components/bomb-info')
+    const user = userEvent.setup()
+    render(<BombFields />)
+    const sw = () => screen.getByRole('button', { name: /Lit CAR indicator/ })
+    expect(bombStore.state.litCAR).toBeNull()
+    await user.click(sw())
+    expect(bombStore.state.litCAR).toBe(true)
+    await user.click(sw())
+    expect(bombStore.state.litCAR).toBe(false)
+    await user.click(sw())
+    expect(bombStore.state.litCAR).toBeNull()
+  })
+
+  it('Simon Says sets strikes from the module and caps at 2', async () => {
+    const user = userEvent.setup()
+    act(() => setModuleLevel('simon', 'simplified'))
+    render(<ModuleCard def={byId('simon')} />)
+    const add = screen.getByRole('button', { name: /Strike$/ })
+    await user.click(add)
+    expect(bombStore.state.strikes).toBe(1)
+    await user.click(add)
+    expect(bombStore.state.strikes).toBe(2)
+    expect(add).toBeDisabled()
+    await user.click(screen.getByRole('button', { name: 'Strike 2' }))
+    expect(bombStore.state.strikes).toBe(1)
+  })
+})

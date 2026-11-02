@@ -1,5 +1,5 @@
 import { Undo2 } from 'lucide-react'
-import { Answer, cap, ColorPad, Hint, NeedFact, Subhead, Swatch } from '@/components/kit'
+import { Answer, cap, ColorPad, Hint, NeedFact, StrikeControl, Subhead, Swatch } from '@/components/kit'
 import { Button } from '@/components/ui/button'
 import { serialFacts } from '@/lib/bomb'
 import { useBomb, useSolution } from '@/lib/hooks'
@@ -50,6 +50,17 @@ function Table({ vowel, strikes }: { vowel: boolean; strikes?: number | null }) 
   )
 }
 
+/** Strikes decide which table row applies, so they're adjustable right here. */
+function Strikes() {
+  const bomb = useBomb()
+  return (
+    <div className="flex flex-wrap items-center gap-x-4 gap-y-2 rounded-md border-2 border-dashed p-2.5">
+      <Subhead className="mb-0">Strikes</Subhead>
+      <StrikeControl strikes={bomb.strikes} withAdd />
+    </div>
+  )
+}
+
 function None() {
   return (
     <div className="space-y-5">
@@ -65,8 +76,8 @@ function Simplified() {
   const { vowel } = serialFacts(bomb.serial)
   return (
     <div className="space-y-5">
+      <Strikes />
       {vowel === null && <NeedFact fact="serialVowel" />}
-      {bomb.strikes === null && <NeedFact fact="strikes" />}
       {vowel !== false && <Table vowel strikes={bomb.strikes} />}
       {vowel !== true && <Table vowel={false} strikes={bomb.strikes} />}
     </div>
@@ -81,6 +92,7 @@ function Interactive() {
 
   return (
     <div className="space-y-4">
+      <Strikes />
       <div>
         <Subhead>Add the flashes in order</Subhead>
         <ColorPad label="Add flash" colors={SIMON_COLORS} onPick={(c) => setFlashes((p) => [...p, c])} />
@@ -112,7 +124,6 @@ function Interactive() {
           </Answer>
         )
       )}
-      <Hint>Got a strike? Update strikes in bomb info; the answer updates.</Hint>
     </div>
   )
 }

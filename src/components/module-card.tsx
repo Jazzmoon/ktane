@@ -20,7 +20,7 @@ export function useModuleLevels(def: ModuleDef) {
   }
 }
 
-export function ModuleCard({ def }: { def: ModuleDef }) {
+export function ModuleCard({ def, index }: { def: ModuleDef; index?: number }) {
   const { setting, ceiling, supported, effective } = useModuleLevels(def)
   const View = def.views[effective] ?? def.views.none
   const capped = isCapped(setting, ceiling) && effective !== setting
@@ -30,10 +30,11 @@ export function ModuleCard({ def }: { def: ModuleDef }) {
       id={def.id}
       aria-labelledby={`${def.id}-title`}
       data-module
-      className="scroll-mt-18 rounded-2xl lg:scroll-mt-32 border bg-card text-card-foreground shadow-xs"
+      className="scroll-mt-18 rounded-sm border-2 border-foreground/70 bg-card text-card-foreground shadow-[3px_3px_0_0_var(--border)] lg:scroll-mt-32"
     >
-      <header className="flex flex-wrap items-center gap-x-3 gap-y-2 border-b px-4 py-3 sm:px-5">
-        <h2 id={`${def.id}-title`} className="mr-auto text-lg font-semibold tracking-tight">
+      <header className="flex flex-wrap items-center gap-x-3 gap-y-2 border-b-2 border-foreground/70 px-4 py-3 sm:px-5">
+        <h2 id={`${def.id}-title`} className="mr-auto font-type text-lg font-bold uppercase tracking-[0.08em]">
+          {index !== undefined && <span className="mr-2 text-sm font-normal text-muted-foreground">§{index + 1}</span>}
           {def.title}
           {def.needy && (
             <span className="ml-2 align-middle text-xs font-medium uppercase tracking-wider text-muted-foreground">

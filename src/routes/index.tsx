@@ -74,7 +74,9 @@ function Manual() {
           >
             <Menu />
           </Button>
-          <span className="flex-1 truncate font-semibold tracking-tight">Better Bomb Manual</span>
+          <span className="flex-1 truncate font-type font-bold uppercase tracking-wider">
+            Better Bomb Manual <span className="font-normal text-muted-foreground">· 241</span>
+          </span>
           <Button variant="ghost" size="icon" className="size-11" aria-label="Jump to module" onClick={openPalette}>
             <Search />
           </Button>
@@ -84,15 +86,41 @@ function Manual() {
         <BombBarDesktop />
 
         <main className="mx-auto max-w-4xl space-y-4 px-3 pt-4 pb-28 sm:px-6 lg:pb-12">
-          <div className="px-1 pb-1">
-            <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">Better Bomb Manual</h1>
-            <p className="mt-1 text-sm text-muted-foreground">
-              Interactive Keep Talking and Nobody Explodes manual · version 1 · verification code 241. Set assistance
-              per module or cap it for everything in the sidebar.
+          <div className="relative px-1 pb-1">
+            <span className="stamp absolute top-0 right-1 hidden px-2.5 py-0.5 text-xs sm:block" aria-hidden>
+              Confidential
+            </span>
+            <p className="font-type text-xs uppercase tracking-[0.2em] text-muted-foreground">
+              Bomb defusal manual · v1
+            </p>
+            <h1 className="mt-1 font-type text-3xl font-bold uppercase leading-none tracking-wide sm:text-4xl">
+              Better Bomb
+              <br />
+              Manual
+            </h1>
+            <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 rounded-sm border-2 border-foreground/70 bg-card px-4 py-3">
+              <div>
+                <span className="block font-type text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
+                  Verification code
+                </span>
+                <span
+                  data-testid="verification-code"
+                  className="font-type text-5xl font-bold leading-none tracking-[0.12em]"
+                >
+                  241
+                </span>
+              </div>
+              <p className="max-w-xs flex-1 text-sm text-muted-foreground">
+                Read this to the Defuser. The code in their manual must match, or you have different versions.
+              </p>
+            </div>
+            <p className="mt-3 text-sm text-muted-foreground">
+              Interactive Keep Talking and Nobody Explodes manual. Set assistance per module or cap it for everything in
+              the sidebar.
             </p>
           </div>
-          {MODULES.map((m) => (
-            <ModuleCard key={m.id} def={m} />
+          {MODULES.map((m, i) => (
+            <ModuleCard key={m.id} def={m} index={i} />
           ))}
           <footer className="px-1 pt-4 text-xs text-muted-foreground">
             Unofficial fan-made manual by Team Jazzmoon, for private play. Not affiliated with Steel Crate Games.

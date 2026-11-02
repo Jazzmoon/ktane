@@ -1,8 +1,8 @@
 import type { ReactNode } from 'react'
-import { CircleHelp } from 'lucide-react'
+import { CircleHelp, Plus, X } from 'lucide-react'
 import { FACT_LABELS, type FactName } from '@/lib/bomb'
 import { cn } from '@/lib/utils'
-import { requestFact } from '@/state/bomb'
+import { requestFact, updateBomb } from '@/state/bomb'
 
 /* ------------------------------------------------------------------ */
 /* Segmented control                                                   */
@@ -69,6 +69,126 @@ export function Segmented<T extends string | number>({
           </button>
         )
       })}
+    </div>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/* Toggle switch                                                       */
+/* ------------------------------------------------------------------ */
+
+const NEXT = { null: true, true: false, false: null } as const
+
+/**
+ * Three-position toggle with a status lamp: up = yes, middle = unknown
+ * (the default), down = no. One tap moves it to the next position.
+ */
+export function ToggleSwitch({
+  value,
+  onChange,
+  label,
+  caption,
+  className,
+}: {
+  value: boolean | null
+  onChange: (value: boolean | null) => void
+  label: string
+  caption?: string
+  className?: string
+}) {
+  const state = value === null ? 'unknown' : value ? 'yes' : 'no'
+  return (
+    <div className={cn('inline-flex flex-col items-center gap-1.5', className)}>
+      <span
+        aria-hidden
+        data-lamp={state}
+        className={cn(
+          'size-2.5 rounded-full border transition-colors',
+          state === 'unknown' && 'border-muted-foreground/60 bg-led-off',
+          state === 'yes' && 'border-go bg-go shadow-[0_0_8px_var(--go)]',
+          state === 'no' && 'border-stop bg-stop shadow-[0_0_8px_var(--stop)]',
+        )}
+      />
+      <button
+        type="button"
+        aria-label={`${label}: ${state}. Tap to change.`}
+        data-state={state}
+        onClick={() => onChange(NEXT[String(value) as keyof typeof NEXT])}
+        className={cn(
+          'relative h-16 w-10 rounded-md border-2 border-foreground bg-switch-off outline-none transition-colors',
+          'focus-visible:ring-[3px] focus-visible:ring-ring/50 active:brightness-95',
+        )}
+      >
+        <span
+          aria-hidden
+          className={cn(
+            'absolute inset-x-1 h-5 rounded-sm bg-foreground shadow-sm transition-[top] duration-150',
+            state === 'yes' ? 'top-1' : state === 'no' ? 'top-[2.375rem]' : 'top-[1.125rem]',
+          )}
+        />
+      </button>
+      <span className="font-type text-[10px] font-bold uppercase tracking-[0.15em] text-muted-foreground">
+        {caption ?? label}
+      </span>
+    </div>
+  )
+}
+
+/**
+ * Strike indicator, wired to the shared bomb-info strike count. Strikes cap
+ * at 2: a third one is the end of the bomb, so there is nothing to look up.
+ */
+export function StrikeControl({
+  strikes,
+  withAdd = false,
+  className,
+}: {
+  strikes: 0 | 1 | 2 | null
+  withAdd?: boolean
+  className?: string
+}) {
+  const set = (n: 0 | 1 | 2) => updateBomb({ strikes: n })
+  return (
+    <div className={cn('flex items-center gap-3', className)}>
+      <div role="group" aria-label="Strikes" className="flex items-center gap-1.5">
+        {([1, 2] as const).map((n) => {
+          const lit = (strikes ?? 0) >= n
+          return (
+            <button
+              key={n}
+              type="button"
+              aria-label={`Strike ${n}`}
+              aria-pressed={lit}
+              data-lit={lit}
+              onClick={() => set(strikes === n ? ((n - 1) as 0 | 1) : n)}
+              className={cn(
+                'flex size-11 items-center justify-center rounded-md border-2 outline-none transition-colors sm:size-9',
+                'focus-visible:ring-[3px] focus-visible:ring-ring/50',
+                lit
+                  ? 'border-stop bg-stop-soft text-stop shadow-[0_0_8px_var(--stop)]'
+                  : 'border-foreground/60 bg-switch-off text-muted-foreground/40',
+              )}
+            >
+              <X className="size-6 stroke-[3]" />
+            </button>
+          )
+        })}
+      </div>
+      {strikes === null && <span className="font-type text-xs text-muted-foreground">unknown</span>}
+      {withAdd && (
+        <button
+          type="button"
+          disabled={strikes === 2}
+          onClick={() => set(((strikes ?? 0) + 1) as 1 | 2)}
+          className={cn(
+            'inline-flex min-h-11 items-center gap-1.5 rounded-md border-2 border-stop px-3 font-type text-sm font-bold uppercase tracking-wider text-stop outline-none sm:min-h-9',
+            'hover:bg-stop-soft active:scale-[0.97] focus-visible:ring-[3px] focus-visible:ring-ring/50',
+            'disabled:pointer-events-none disabled:opacity-40',
+          )}
+        >
+          <Plus className="size-4" /> Strike
+        </button>
+      )}
     </div>
   )
 }
@@ -193,7 +313,7 @@ export function NeedFact({ fact, className }: { fact: FactName; className?: stri
 
 export function Subhead({ children, className }: { children: ReactNode; className?: string }) {
   return (
-    <h4 className={cn('mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground', className)}>
+    <h4 className={cn('mb-2 font-type text-xs font-bold uppercase tracking-[0.15em] text-muted-foreground', className)}>
       {children}
     </h4>
   )
